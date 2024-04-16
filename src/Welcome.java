@@ -112,7 +112,7 @@ mUser= new User(userName,userMobile);
 	}
 
 	public static void menuCartItemList() {
-		System.out.println("장바구니 상품 목록 :");
+		/*System.out.println("장바구니 상품 목록 :");
 		System.out.println("---------------------------------------------");
 		System.out.println("    도서ID \t|     수량 \t|      합계");
 		for (int i = 0; i < mCartCount; i++) {
@@ -121,25 +121,46 @@ mUser= new User(userName,userMobile);
 			System.out.print("    " + mCartItem[i].getTotalPrice());
 			System.out.println("  ");
 		}
+		
 		System.out.println("---------------------------------------------");
+		*/
+		
+		if (mCart.mCartCount >=0) {
+			mCart.printCart();
+		}
 	}
 
 	public static void menuCartClear() {
-		System.out.println("3. 장바구니 비우기 : ");
+		System.out.println(" 3 장바구니 비우기 ");
+		if(mCart.mCartCount ==0)
+			System.out.println("장바구니에 항목이 없습니다");
+		else {
+			System.out.println("장바구니의 모든 항목을 삭제하겠습니까? Y | N");
+			Scanner input = new Scanner(System.in);
+			String str = input.nextLine();
+			
+			if(str.toUpperCase().equals("Y")) {
+				System.out.println("장바구니의 모든 항목을 삭제했습니다");
+				//mCart.mCartItem = new CartItemBook[NUM_BOOK];
+				mCart.deletBook();
+			}
+		}
 
 	}
 
-	public static void menuCartAddItem(String[][] book) {
+	public static void menuCartAddItem(Book[] booklist) {
 		// System.out.println("장바구니에 항목 추가하기 : ");
 
-		BookList(book);
+		BookList(booklist);
 
-		for (int i = 0; i < NUM_BOOK; i++) {
+		/*for (int i = 0; i < NUM_BOOK; i++) {
 			for (int j = 0; j < NUM_ITEM; j++)
 				System.out.print(book[i][j] + " | ");
 			System.out.println("");
 		}
-
+*/
+		mCart.printBookList(booklist);
+		
 		boolean quit = false;
 
 		while (!quit) {
@@ -152,7 +173,7 @@ mUser= new User(userName,userMobile);
 			int numId = -1;
 
 			for (int i = 0; i < NUM_BOOK; i++)
-				if (str.equals(book[i][0])) {
+				if (str.equals(booklist[i].getBookId)) {
 					numId = i;
 					flag = true;
 					break;
@@ -164,12 +185,16 @@ mUser= new User(userName,userMobile);
 
 				if (str.toUpperCase().equals("Y")) {
 					System.out.println(book[numId][0] + " 도서가 장바구니에 추가되었습니다.");
-					// 장바구니에 넣기
-					if (!isCartInBook(book[numId][0]))
-						mCartItem[mCartCount++] = new CartItem(book[numId]);
+					// 카트에 넣기
+					if (!isCartInBook(booklist[numId].getBookId)) {
+						//
+						//
+						//
+					
+						mCart.insertBook(booklist[numId]);
+				}
 				}
 				quit = true;
-				input.close(); // 추가
 			} else
 				System.out.println("다시 입력하세요.");
 		}
@@ -237,7 +262,7 @@ System.out.print("비밀번호");
 
 	public static boolean isCartInBook(String bookId) {
 
-		boolean flag = false;
+	/*	boolean flag = false;
 		for (int i = 0; i < mCartCount; i++) {
 			if (bookId == mCartItem[i].getBookID()) {
 				mCartItem[i].setQuantity(mCartItem[i].getQuantity() + 1);
@@ -245,5 +270,7 @@ System.out.print("비밀번호");
 			}
 		}
 		return flag;
+		*/
+		return mCart.isCartInBook(bookId);
 	}
 }
