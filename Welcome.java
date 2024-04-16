@@ -9,7 +9,6 @@ String tagline = "welcome to book market!!";
 	static final int NUM_BOOK =3;
 	static final int NUM_ITEM =7;
 	
-
 	public static void menuCartAddItem(String[][]book){
 		
 boolean quit =false;
