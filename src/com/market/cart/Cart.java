@@ -1,8 +1,11 @@
+package com.market.cart;
+import com.market.bookitem.Book;
+
 public class Cart implements CartInterface {
 	
 	static final int NUM_BOOK = 3;
-	CartItem[]mCartItem = new CartItem[NUM_BOOK];
-	static int mCartCount =0;
+	public CartItem[] mCartItem = new CartItem[NUM_BOOK];
+ static public int mCartCount =0;
 	
 	public Cart() {
 		
@@ -17,7 +20,7 @@ public class Cart implements CartInterface {
 			System.out.print(booklist[i].getDescription()+"|");
 			System.out.print(booklist[i].getCategory()+"|");
 			System.out.print(booklist[i].getReleaseDate()+"|");
-			
+			System.out.println("");
 			
 		}
 	}

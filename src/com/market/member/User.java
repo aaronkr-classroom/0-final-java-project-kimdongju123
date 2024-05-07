@@ -1,4 +1,4 @@
-
+package com.market.member;
 public class User extends person {
 
 	public User(String name, int phone) {
